@@ -6,19 +6,18 @@ import org.springframework.boot.context.properties.source.ConfigurationPropertyS
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-
 @Component
-public class SimpleService {
+public class NestedService {
 
     @Autowired
     private Environment environment;
 
-    public SimpleRecord simple() {
+    public Nested nested() {
 
         ConfigurationPropertySources.attach(environment);
         Binder binder = new Binder(ConfigurationPropertySources.get(environment));
 
-        SimpleRecord record = binder.bindOrCreate("retry", SimpleRecord.class);
+        Nested record = binder.bindOrCreate("outer", Nested.class);
         return record;
     }
 

@@ -1,12 +1,12 @@
 plugins {
     id 'java'
     id "io.spring.dependency-management" version '1.0.12.RELEASE'
-    id 'org.springframework.boot' version '2.7.2'
+    //id 'org.springframework.boot' version '3.0.0-RC1'
 
 }
 
 ext {
-    springBootBomVersion = '2.7.2'
+    springBootBomVersion = '3.0.0-SNAPSHOT'
     junitBomVersion = '5.9.0'
 }
 
@@ -15,6 +15,19 @@ version '1.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://repo.spring.io/snapshot"
+        allowInsecureProtocol = true
+    }
+    maven {
+        url "http://repo.spring.io/milestone"
+        allowInsecureProtocol = true
+    }
+    mavenCentral()
+    maven {
+        url "http://repo.spring.io/libs-milestone"
+        allowInsecureProtocol = true
+    }
 }
 
 dependencyManagement {
@@ -25,6 +38,8 @@ dependencyManagement {
 }
 
 dependencies {
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.0.0-SNAPSHOT'
 
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

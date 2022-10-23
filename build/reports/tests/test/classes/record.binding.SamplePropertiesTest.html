@@ -76,7 +76,7 @@
 <a name="test()"></a>
 <h3 class="failures">test()</h3>
 <span class="code">
-<pre>java.lang.IllegalStateException: Failed to load ApplicationContext for [ReactiveWebMergedContextConfiguration@1e63ec0b testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]
+<pre>java.lang.IllegalStateException: Failed to load ApplicationContext for [ReactiveWebMergedContextConfiguration@5316e95f testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:133)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:125)
 	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:135)
@@ -164,48 +164,21 @@
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
-Caused by: java.lang.IllegalStateException: record.binding.SampleProperties declares @ConstructorBinding and @Autowired constructor
-	at org.springframework.util.Assert.state(Assert.java:97)
-	at org.springframework.boot.context.properties.bind.DefaultBindConstructorProvider.getBindConstructor(DefaultBindConstructorProvider.java:49)
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBean$BindMethod.get(ConfigurationPropertiesBean.java:327)
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.createBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:92)
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.registerBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:88)
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:60)
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:54)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.registerBeanDefinitions(EnableConfigurationPropertiesRegistrar.java:49)
-	at org.springframework.context.annotation.ImportBeanDefinitionRegistrar.registerBeanDefinitions(ImportBeanDefinitionRegistrar.java:86)
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:373)
-	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721)
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:372)
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148)
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120)
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:409)
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:283)
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:344)
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:115)
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+Caused by: java.lang.IllegalStateException: Cannot bind @ConfigurationProperties for bean 'org.sample-record.binding.SampleProperties'. Ensure that @ConstructorBinding has not been applied to regular bean
+	at org.springframework.util.Assert.state(Assert.java:76)
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.bind(ConfigurationPropertiesBindingPostProcessor.java:86)
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.postProcessBeforeInitialization(ConfigurationPropertiesBindingPostProcessor.java:78)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:420)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:411)
+	at org.springframework.cloud.context.properties.ConfigurationPropertiesRebinder.rebind(ConfigurationPropertiesRebinder.java:105)
+	at org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration.afterSingletonsInstantiated(ConfigurationPropertiesRebinderAutoConfiguration.java:73)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:942)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:916)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
-	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:150)
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.bootstrapServiceContext(BootstrapApplicationListener.java:195)
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:114)
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:77)
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131)
-	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136)
-	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:82)
-	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
-	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63)
-	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:352)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303)
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136)
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:104)
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:181)
@@ -235,68 +208,52 @@ Caused by: java.lang.IllegalStateException: record.binding.SampleProperties decl
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>11:27:59.430 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-11:27:59.440 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-11:27:59.453 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [record.binding.SamplePropertiesTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-11:27:59.458 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [record.binding.SamplePropertiesTest], using SpringBootContextLoader
-11:27:59.459 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [record.binding.SamplePropertiesTest]: class path resource [record/binding/SamplePropertiesTest-context.xml] does not exist
-11:27:59.460 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [record.binding.SamplePropertiesTest]: class path resource [record/binding/SamplePropertiesTestContext.groovy] does not exist
-11:27:59.460 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [record.binding.SamplePropertiesTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-11:27:59.471 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded ContextCustomizerFactory implementations from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizerFactory, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizerFactory, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory, org.springframework.boot.test.context.ImportsContextCustomizerFactory, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizerFactory, org.springframework.boot.test.graphql.tester.HttpGraphQlTesterContextCustomizerFactory, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory, org.springframework.boot.test.mock.mockito.MockitoContextCustomizerFactory, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizerFactory, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizerFactory, org.springframework.test.context.web.socket.MockServerContainerContextCustomizerFactory, org.springframework.test.context.support.DynamicPropertiesContextCustomizerFactory]
-11:27:59.478 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers: [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d]
-11:27:59.480 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [record.binding.SamplePropertiesTest]
-11:27:59.527 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [record.binding.SamplePropertiesTest]: using defaults.
-11:27:59.529 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [jakarta/servlet/ServletContext]
-11:27:59.530 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
-11:27:59.531 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
-11:27:59.531 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener implementations from location [META-INF/spring.factories]: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
-11:27:59.532 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6f2cb653, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@14c01636, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@590c73d3, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6b9ce1bf, org.springframework.test.context.support.DirtiesContextTestExecutionListener@61884cb1, org.springframework.test.context.event.EventPublishingTestExecutionListener@75ed9710, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4fc5e095, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@435871cb, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@609640d5, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@79da1ec0, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@19fb8826, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@192d74fb]
-11:27:59.533 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@1d8062d2 testClass = SamplePropertiesTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [ReactiveWebMergedContextConfiguration@1e63ec0b testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null].
-11:27:59.538 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [DefaultTestContext@1d8062d2 testClass = SamplePropertiesTest, testInstance = record.binding.SamplePropertiesTest@44828f6b, testMethod = [null], testException = [null], mergedContextConfiguration = [ReactiveWebMergedContextConfiguration@1e63ec0b testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
-2022-10-23T11:27:59.739+03:00 ERROR 28389 --- [    Test worker] o.s.boot.SpringApplication               : Application run failed
+<pre>11:31:20.574 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+11:31:20.585 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+11:31:20.600 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [record.binding.SamplePropertiesTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+11:31:20.605 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [record.binding.SamplePropertiesTest], using SpringBootContextLoader
+11:31:20.607 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [record.binding.SamplePropertiesTest]: class path resource [record/binding/SamplePropertiesTest-context.xml] does not exist
+11:31:20.607 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [record.binding.SamplePropertiesTest]: class path resource [record/binding/SamplePropertiesTestContext.groovy] does not exist
+11:31:20.607 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [record.binding.SamplePropertiesTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+11:31:20.620 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded ContextCustomizerFactory implementations from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.OverrideAutoConfigurationContextCustomizerFactory, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory, org.springframework.boot.test.autoconfigure.filter.TypeExcludeFiltersContextCustomizerFactory, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizerFactory, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory, org.springframework.boot.test.context.ImportsContextCustomizerFactory, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizerFactory, org.springframework.boot.test.graphql.tester.HttpGraphQlTesterContextCustomizerFactory, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory, org.springframework.boot.test.mock.mockito.MockitoContextCustomizerFactory, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizerFactory, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizerFactory, org.springframework.test.context.web.socket.MockServerContainerContextCustomizerFactory, org.springframework.test.context.support.DynamicPropertiesContextCustomizerFactory]
+11:31:20.630 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers: [org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d]
+11:31:20.632 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [record.binding.SamplePropertiesTest]
+11:31:20.674 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [record.binding.SamplePropertiesTest]: using defaults.
+11:31:20.676 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [jakarta/servlet/ServletContext]
+11:31:20.677 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+11:31:20.678 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+11:31:20.678 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener implementations from location [META-INF/spring.factories]: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+11:31:20.679 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2fea7088, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@40499e4f, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@51cd7ffc, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@30d4b288, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4cc6fa2a, org.springframework.test.context.event.EventPublishingTestExecutionListener@40f1be1b, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@7a791b66, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@6f2cb653, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@14c01636, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@590c73d3, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@6b9ce1bf, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@61884cb1]
+11:31:20.681 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@13e3c1c7 testClass = SamplePropertiesTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [ReactiveWebMergedContextConfiguration@5316e95f testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map[[empty]]], class annotated with @DirtiesContext [false] with mode [null].
+11:31:20.686 [Test worker] DEBUG org.springframework.test.context.support.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [DefaultTestContext@13e3c1c7 testClass = SamplePropertiesTest, testInstance = record.binding.SamplePropertiesTest@3829ac1, testMethod = [null], testException = [null], mergedContextConfiguration = [ReactiveWebMergedContextConfiguration@5316e95f testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
 
-java.lang.IllegalStateException: record.binding.SampleProperties declares @ConstructorBinding and @Autowired constructor
-	at org.springframework.util.Assert.state(Assert.java:97) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.properties.bind.DefaultBindConstructorProvider.getBindConstructor(DefaultBindConstructorProvider.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBean$BindMethod.get(ConfigurationPropertiesBean.java:327) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.createBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:92) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.registerBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:88) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:60) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:54) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.registerBeanDefinitions(EnableConfigurationPropertiesRegistrar.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.context.annotation.ImportBeanDefinitionRegistrar.registerBeanDefinitions(ImportBeanDefinitionRegistrar.java:86) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:373) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721) ~[na:na]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:372) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:409) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:283) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:344) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:115) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::       (v3.0.0-SNAPSHOT)
+
+2022-10-23T11:31:20.958+03:00  INFO 28531 --- [    Test worker] record.binding.SamplePropertiesTest      : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-10-23T11:31:21.136+03:00  INFO 28531 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=05fe2148-01cb-35b0-bac0-4e65faca37eb
+2022-10-23T11:31:21.382+03:00 ERROR 28531 --- [    Test worker] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Cannot bind @ConfigurationProperties for bean 'org.sample-record.binding.SampleProperties'. Ensure that @ConstructorBinding has not been applied to regular bean
+	at org.springframework.util.Assert.state(Assert.java:76) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.bind(ConfigurationPropertiesBindingPostProcessor.java:86) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.postProcessBeforeInitialization(ConfigurationPropertiesBindingPostProcessor.java:78) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:420) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:411) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.cloud.context.properties.ConfigurationPropertiesRebinder.rebind(ConfigurationPropertiesRebinder.java:105) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
+	at org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration.afterSingletonsInstantiated(ConfigurationPropertiesRebinderAutoConfiguration.java:73) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:942) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:916) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:150) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.bootstrapServiceContext(BootstrapApplicationListener.java:195) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:114) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:77) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:82) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:352) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:104) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:181) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
@@ -388,185 +345,34 @@ java.lang.IllegalStateException: record.binding.SampleProperties declares @Const
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 
-2022-10-23T11:27:59.748+03:00 ERROR 28389 --- [    Test worker] o.s.boot.SpringApplication               : Application run failed
 
-java.lang.IllegalStateException: record.binding.SampleProperties declares @ConstructorBinding and @Autowired constructor
-	at org.springframework.util.Assert.state(Assert.java:97) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.properties.bind.DefaultBindConstructorProvider.getBindConstructor(DefaultBindConstructorProvider.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBean$BindMethod.get(ConfigurationPropertiesBean.java:327) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.createBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:92) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.registerBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:88) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:60) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:54) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.registerBeanDefinitions(EnableConfigurationPropertiesRegistrar.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.context.annotation.ImportBeanDefinitionRegistrar.registerBeanDefinitions(ImportBeanDefinitionRegistrar.java:86) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:373) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721) ~[na:na]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:372) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:409) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:283) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:344) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:115) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::       (v3.0.0-SNAPSHOT)
+
+2022-10-23T11:31:21.428+03:00  INFO 28531 --- [    Test worker] record.binding.SamplePropertiesTest      : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-10-23T11:31:21.472+03:00  INFO 28531 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=05fe2148-01cb-35b0-bac0-4e65faca37eb
+2022-10-23T11:31:21.516+03:00 ERROR 28531 --- [    Test worker] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Cannot bind @ConfigurationProperties for bean 'org.sample-record.binding.SampleProperties'. Ensure that @ConstructorBinding has not been applied to regular bean
+	at org.springframework.util.Assert.state(Assert.java:76) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.bind(ConfigurationPropertiesBindingPostProcessor.java:86) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.postProcessBeforeInitialization(ConfigurationPropertiesBindingPostProcessor.java:78) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:420) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:411) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.cloud.context.properties.ConfigurationPropertiesRebinder.rebind(ConfigurationPropertiesRebinder.java:105) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
+	at org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration.afterSingletonsInstantiated(ConfigurationPropertiesRebinderAutoConfiguration.java:73) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:942) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:916) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:150) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.bootstrapServiceContext(BootstrapApplicationListener.java:195) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:114) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:77) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:82) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:352) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:104) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:181) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:109) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:125) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:135) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:94) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener.prepareTestInstance(SpringBootDependencyInjectionTestExecutionListener.java:43) ~[spring-boot-test-autoconfigure-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:249) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$10(ClassBasedTestDescriptor.java:377) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:382) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:377) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
-	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310) ~[na:na]
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735) ~[na:na]
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762) ~[na:na]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:376) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:289) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:288) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:278) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:277) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:105) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:104) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) ~[na:na]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96) ~[na:na]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-	at jdk.proxy1/jdk.proxy1.$Proxy2.stop(Unknown Source) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133) ~[na:na]
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71) ~[na:na]
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-
-2022-10-23T11:27:59.785+03:00 ERROR 28389 --- [    Test worker] o.s.boot.SpringApplication               : Application run failed
-
-java.lang.IllegalStateException: record.binding.SampleProperties declares @ConstructorBinding and @Autowired constructor
-	at org.springframework.util.Assert.state(Assert.java:97) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.properties.bind.DefaultBindConstructorProvider.getBindConstructor(DefaultBindConstructorProvider.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBean$BindMethod.get(ConfigurationPropertiesBean.java:327) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.createBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:92) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.registerBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:88) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:60) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:54) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.registerBeanDefinitions(EnableConfigurationPropertiesRegistrar.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.context.annotation.ImportBeanDefinitionRegistrar.registerBeanDefinitions(ImportBeanDefinitionRegistrar.java:86) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:373) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721) ~[na:na]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:372) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:409) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:283) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:344) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:115) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:150) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.bootstrapServiceContext(BootstrapApplicationListener.java:195) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:114) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:77) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:82) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:352) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:104) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:181) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
@@ -657,143 +463,9 @@ java.lang.IllegalStateException: record.binding.SampleProperties declares @Const
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 
-2022-10-23T11:27:59.790+03:00 ERROR 28389 --- [    Test worker] o.s.boot.SpringApplication               : Application run failed
+2022-10-23T11:31:21.519+03:00 ERROR 28531 --- [    Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@30d4b288] to prepare test instance [record.binding.SamplePropertiesTest@3829ac1]
 
-java.lang.IllegalStateException: record.binding.SampleProperties declares @ConstructorBinding and @Autowired constructor
-	at org.springframework.util.Assert.state(Assert.java:97) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.properties.bind.DefaultBindConstructorProvider.getBindConstructor(DefaultBindConstructorProvider.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBean$BindMethod.get(ConfigurationPropertiesBean.java:327) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.createBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:92) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.registerBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:88) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:60) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:54) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.registerBeanDefinitions(EnableConfigurationPropertiesRegistrar.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.context.annotation.ImportBeanDefinitionRegistrar.registerBeanDefinitions(ImportBeanDefinitionRegistrar.java:86) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:373) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721) ~[na:na]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:372) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:409) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:283) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:344) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:115) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:150) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.bootstrapServiceContext(BootstrapApplicationListener.java:195) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:114) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:77) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:82) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:352) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:104) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:181) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:109) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:125) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener.outputConditionEvaluationReport(SpringBootDependencyInjectionTestExecutionListener.java:53) ~[spring-boot-test-autoconfigure-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener.prepareTestInstance(SpringBootDependencyInjectionTestExecutionListener.java:46) ~[spring-boot-test-autoconfigure-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:249) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$10(ClassBasedTestDescriptor.java:377) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:382) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:377) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
-	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310) ~[na:na]
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735) ~[na:na]
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762) ~[na:na]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:376) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:289) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:288) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:278) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:277) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:105) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:104) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:68) ~[junit-jupiter-engine-5.9.0.jar:5.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54) ~[junit-platform-engine-1.9.0.jar:1.9.0]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67) ~[na:na]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52) ~[na:na]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96) ~[na:na]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:75) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.processAllTestClasses(JUnitPlatformTestClassProcessor.java:99) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor$CollectAllTestClassesExecutor.access$000(JUnitPlatformTestClassProcessor.java:79) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestClassProcessor.stop(JUnitPlatformTestClassProcessor.java:75) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-	at jdk.proxy1/jdk.proxy1.$Proxy2.stop(Unknown Source) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133) ~[na:na]
-	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71) ~[na:na]
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-
-2022-10-23T11:27:59.793+03:00 ERROR 28389 --- [    Test worker] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6b9ce1bf] to prepare test instance [record.binding.SamplePropertiesTest@44828f6b]
-
-java.lang.IllegalStateException: Failed to load ApplicationContext for [ReactiveWebMergedContextConfiguration@1e63ec0b testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]
+java.lang.IllegalStateException: Failed to load ApplicationContext for [ReactiveWebMergedContextConfiguration@5316e95f testClass = SamplePropertiesTest, locations = '{}', classes = '{class record.binding.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{spring.cloud.bootstrap.enabled=true, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@9da1, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@6eb2384f, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@12f9af83, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@10cf09e8, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6e4566f1, org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizer@53de625d, org.springframework.boot.test.context.SpringBootTestAnnotation@86b7a23a], contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:133) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:125) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
 	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:135) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
@@ -881,48 +553,21 @@ java.lang.IllegalStateException: Failed to load ApplicationContext for [Reactive
 	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71) ~[na:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-Caused by: java.lang.IllegalStateException: record.binding.SampleProperties declares @ConstructorBinding and @Autowired constructor
-	at org.springframework.util.Assert.state(Assert.java:97) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.properties.bind.DefaultBindConstructorProvider.getBindConstructor(DefaultBindConstructorProvider.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBean$BindMethod.get(ConfigurationPropertiesBean.java:327) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.createBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:92) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.registerBeanDefinition(ConfigurationPropertiesBeanRegistrar.java:88) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:60) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.properties.ConfigurationPropertiesBeanRegistrar.register(ConfigurationPropertiesBeanRegistrar.java:54) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.context.properties.EnableConfigurationPropertiesRegistrar.registerBeanDefinitions(EnableConfigurationPropertiesRegistrar.java:49) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.context.annotation.ImportBeanDefinitionRegistrar.registerBeanDefinitions(ImportBeanDefinitionRegistrar.java:86) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:373) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:721) ~[na:na]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:372) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:409) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:283) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:344) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:115) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
+Caused by: java.lang.IllegalStateException: Cannot bind @ConfigurationProperties for bean 'org.sample-record.binding.SampleProperties'. Ensure that @ConstructorBinding has not been applied to regular bean
+	at org.springframework.util.Assert.state(Assert.java:76) ~[spring-core-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.bind(ConfigurationPropertiesBindingPostProcessor.java:86) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
+	at org.springframework.boot.context.properties.ConfigurationPropertiesBindingPostProcessor.postProcessBeforeInitialization(ConfigurationPropertiesBindingPostProcessor.java:78) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyBeanPostProcessorsBeforeInitialization(AbstractAutowireCapableBeanFactory.java:420) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:411) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.cloud.context.properties.ConfigurationPropertiesRebinder.rebind(ConfigurationPropertiesRebinder.java:105) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
+	at org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration.afterSingletonsInstantiated(ConfigurationPropertiesRebinderAutoConfiguration.java:73) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:942) ~[spring-beans-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:916) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:150) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.bootstrapServiceContext(BootstrapApplicationListener.java:195) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:114) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.cloud.bootstrap.BootstrapApplicationListener.onApplicationEvent(BootstrapApplicationListener.java:77) ~[spring-cloud-context-4.0.0-SNAPSHOT.jar:4.0.0-SNAPSHOT]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131) ~[spring-context-6.0.0-RC2.jar:6.0.0-RC2]
-	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:82) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:352) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:104) ~[spring-boot-test-3.0.0-SNAPSHOT.jar:3.0.0-SNAPSHOT]
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:181) ~[spring-test-6.0.0-RC2.jar:6.0.0-RC2]
@@ -940,7 +585,7 @@ Caused by: java.lang.IllegalStateException: record.binding.SampleProperties decl
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.4</a> at Oct 23, 2022, 11:27:59 AM</p>
+<a href="http://www.gradle.org">Gradle 7.4</a> at Oct 23, 2022, 11:31:21 AM</p>
 </div>
 </div>
 </body>
